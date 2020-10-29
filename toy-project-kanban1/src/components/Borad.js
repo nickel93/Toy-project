@@ -1,28 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import Borads from './borads/Borads'
-import * as sample_note from '../sample_note';
+import sample_note from '../sample_note';
 const Borad = () => {
-    const [sampleState, setsample] = useState(sample_note.default);
-
-    let test = () => {
-        console.log("왔어")
-        sampleState.experiments.map((el, index) => {
-            console.log(el.name);
-            return (
-                <div>
-                    <Borads name={el.name} />
-                </div>
-            );
-        });
-    };
+    const [sampleState, setsample] = useState(sample_note);
 
     return (
         <div>
-            {test()}
+            {sampleState.experiments.map((el, index) => (<Borads name={el.name} />))}
         </div>
     );
-
 };
+
 
 
 export default Borad;

@@ -3,9 +3,7 @@ import Element from '../element/Element'
 const Borads = (props) => {
 
     return (
-        <div>
-            {props.name}
-        </div>
+        props.name
     );
 };
 
