@@ -1,10 +1,10 @@
 import React from 'react';
-import Board from '../component/Borad'
+import Board from '../components/Borad'
 const Kanbancontainer = () => {
 
     return (
         <div>
-            <Borad />
+            <Board />
         </div>
     );
 
