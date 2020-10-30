@@ -1,5 +1,6 @@
 import React from 'react';
 import Boards from './board/boards'
+import "./Board.scss";
 const Board = (props) => {
     //데이터를 변경하고있을때 useState사용
     // const [sampleState] = useState(sample_note);
@@ -10,7 +11,7 @@ const Board = (props) => {
         )
     });
     return (
-        <div>
+        <div className={"board-container"}>
             {experiment}
         </div>
     );

@@ -1,5 +1,6 @@
 import React from 'react';
 import Element from '../element/Element'
+import "./boards.scss";
 const boards = (props) => {
     const task = props.taska.map((el) => {
         return (
@@ -10,7 +11,7 @@ const boards = (props) => {
         )
     });
     return (
-        <div>
+        <div className="boards-name">
             <h1> {props.id} </h1>
             {task}
         </div>
