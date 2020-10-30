@@ -1,6 +1,6 @@
 import React from 'react';
 import Board from '../components/Borad'
-const Kanbancontainer = () => {
+const kanbancontainer = () => {
 
     return (
         <div>
@@ -10,5 +10,5 @@ const Kanbancontainer = () => {
 
 };
 
-export default Kanbancontainer
+export default kanbancontainer
 

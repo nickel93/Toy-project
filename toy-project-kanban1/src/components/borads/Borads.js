@@ -1,10 +1,14 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Element from '../element/Element'
-const Borads = (props) => {
+const borads = (props) => {
 
     return (
-        props.name
+        <div>
+            {props.name}
+            {props.task.map((el, index) => (<Element task={el} />))}
+        </div>
+
     );
 };
 
-export default Borads;
+export default borads;

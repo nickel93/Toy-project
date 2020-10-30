@@ -1,8 +1,8 @@
 import Kanbancontainer from './container/Kanbancontainer'
-function App() {
+const app = () => {
   return (
     <Kanbancontainer />
   );
 }
 
-export default App;
+export default app;
