@@ -5,13 +5,13 @@ const element = (props) => {
         case "chemical":
             return (
                 <div>
-                    <h4>{props.task.info.stat + " " + props.task.info.display + " " + props.task.info.volume}</h4>
+                    <span>{props.task.info.stat}</span><span>{props.task.info.display}</span><span>{props.task.info.volume}</span>
                 </div>
             );
         case "process":
             return (
                 <div>
-                    <h4>{props.task.info.name + " " + props.task.info.time + " " + props.task.info.heating + " " + props.task.info.stirring + " " + props.task.info.gradually}</h4>
+                    <span>{props.task.info.name}</span><span>{props.task.info.time}</span><span>{props.task.info.heating}</span><span>{props.task.info.stirring}</span><span>{props.task.info.gradually}</span>
                 </div>
             );
         default:

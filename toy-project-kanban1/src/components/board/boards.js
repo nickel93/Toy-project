@@ -11,7 +11,7 @@ const boards = (props) => {
         )
     });
     return (
-        <div className="boards-name">
+        <div className="item">
             <h1> {props.id} </h1>
             {task}
         </div>
