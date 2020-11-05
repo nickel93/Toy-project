@@ -19,11 +19,10 @@ const setNote = (state, action) => {
 
 const reducer = (state = initialState, action) => {
     switch (action.type) {
-        case actionTypes.SETNODE:
+        case actionType.SETNODE:
             return setNote(state, action);
         default:
             return state;
-
     }
 };
 

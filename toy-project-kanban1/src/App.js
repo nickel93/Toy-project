@@ -1,11 +1,11 @@
 import Kanbancontainer from './container/Kanbancontainer'
-import { BrowserRouter, Route } from 'react-router-dom';
-const app = () => {
+import Routers from './Routers'
+const App = () => {
   return (
-    <BrowserRouter>
-      <Kanbancontainer />
-    </BrowserRouter>
+    <>
+      <Routers />
+    </>
   );
 }
 
-export default app;
+export default App;
