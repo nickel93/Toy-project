@@ -1,11 +1,23 @@
 import React from 'react';
+import { useHistory, useLocation } from 'react-router-dom';
+const Element = (props) => {
+    const history = useHistory();
+    const location = useLocation();
+    const onTaskClicked = (e, taskId) => {
+        e.stopPropagation();
+        const slice = "/";
+        const noteId = "1234";
+        const url = "experiment";
+        history.push(url + slice + noteId + slice + taskId);
+    };
 
-const element = (props) => {
     switch (props.task.type) {
         case "chemical":
             return (
                 <>
-                    <span>{props.task.info.stat}</span><span>{props.task.info.display}</span><span>{props.task.info.volume}</span>
+                    <button onClick={(e) => onTaskClicked(e, props.task.id)}>
+                        <span>{props.task.info.stat}</span><span>{props.task.info.display}</span><span>{props.task.info.volume}</span>
+                    </button>
                 </>
             );
         case "process":
@@ -23,4 +35,4 @@ const element = (props) => {
     }
 };
 
-export default element;
+export default Element;

@@ -1,31 +1,29 @@
 import React, { useEffect, useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux'
-import { loadNote } from '../api/noteAPI';
-import Board from '../components/Board'
 import * as Action from '../store/actions/labnote'
+import Board from '../components/Board'
 import "./Kanbancontainer.scss";
 const Kanbancontainer = () => {
-
+    let project = (
+        <div>
+            wait
+        </div>
+    );
     const data = useSelector((state) => state.data, []);
-    let project = null;
     const dispatch = useDispatch();
+    //reducer move
     const inputdata = useCallback(() => {
-        loadNote("0000").then((response) => {
-            dispatch(Action.setNote(response));
-        });
+        const initNote = Action.initNote();
+        initNote(dispatch);
+        console.log(data.note)
     }, [dispatch])
 
     if (data.note !== null) {
-        console.log(data)
-        const experiments = JSON.parse(data.note.experiments);
-
         project = (
             <>
-                <Board data={experiments} />
+                <Board data={data.experiments} />
             </>
         )
-
-
     }
 
     useEffect(() => {
@@ -36,7 +34,6 @@ const Kanbancontainer = () => {
             {project}
         </div>
     );
-
 };
 
 export default Kanbancontainer

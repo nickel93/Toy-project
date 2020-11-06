@@ -2,17 +2,14 @@ import React, { useEffect } from 'react';
 import Boards from './board/boards'
 import "./Board.scss";
 const Board = (props) => {
-    let experiment = null;
-
+    let experiment = (
+        <>
+            <h3>wait</h3>
+        </>
+    );
     const inputdata = () => {
-        if (props.data === null) {
-            experiment = (
-                <>
-                    <h3>wait</h3>
-                </>
-            );
-        } else {
-            console.log(props.data)
+        if (props.data !== null) {
+
             experiment = props.data.map((el) => {
                 return (
                     <Boards key={el.id} taska={el.tasks} id={el.name} />
@@ -23,8 +20,6 @@ const Board = (props) => {
     useEffect(() => {
         inputdata();
     }, [inputdata()]);
-
-
     return (
         <div className={"board-container"}>
             {experiment}
