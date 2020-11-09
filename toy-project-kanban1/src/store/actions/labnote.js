@@ -9,28 +9,28 @@ const setNote = (note) => {
 
 };
 
-const findNote = (experiments, id) => {
+const findNote = (experiments, id, Eid) => {
     return {
         type: actionType.SETEXPERIMENTS,
         experiments,
-        id
+        id,
+        Eid
     };
 
 };
 
 export const initNote = () => {
     return (dispatch) => {
-        loadNote("0000").then((note) => {
+        loadNote("1234").then((note) => {
             dispatch(setNote(note));
         });
     }
 }
 
 export const findExperiments = () => {
-    return (dispatch, id) => {
+    return (dispatch, id, Eid) => {
         loadNote("1234").then((experiments) => {
-            console.log(experiments)
-            dispatch(findNote(experiments.experiments, id));
+            dispatch(findNote(experiments.experiments, id, Eid));
         });
     }
 }

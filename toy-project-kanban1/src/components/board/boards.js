@@ -7,6 +7,7 @@ const boards = (props) => {
             <Element
                 key={el.id}
                 task={el}
+                Eid={props.Eid}
             />
         )
     });
