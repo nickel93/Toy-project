@@ -3,7 +3,6 @@ import { useDispatch, useSelector } from 'react-redux'
 import * as Action from '../store/actions/labnote'
 import Board from '../components/Board'
 import "./Kanbancontainer.scss";
-import Experiment from '../components/experiment/Experiment'
 const Kanbancontainer = () => {
     //hook
     const data = useSelector((state) => state.data, []);
@@ -13,23 +12,14 @@ const Kanbancontainer = () => {
             wait
         </div>
     );
-    let modal = () => {
-        console.log(data)
-        if (data.flge === true) {
-            <>
-                <Experiment />
-            </>
-        }
-    };
 
-    //reducer move
+    //nodeId 수정
     const inputdata = useCallback(() => {
-        const initNote = Action.initNote();
-        initNote(dispatch);
-        console.log(data.note)
+        dispatch(Action.initNote());
     }, [dispatch])
 
     if (data.note !== null) {
+
         project = (
             <>
                 <Board data={data.experiments} />
@@ -39,12 +29,11 @@ const Kanbancontainer = () => {
 
     useEffect(() => {
         inputdata();
-        modal();
-    }, []);
+    }, [inputdata]);
     return (
         <div className={"kanban-container"}>
             {project}
-            {modal()}
+
         </div>
     );
 };

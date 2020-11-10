@@ -20,7 +20,8 @@ const Experiment = () => {
 
     //input data
     const inputdata = useCallback(() => {
-        console.log(location.state)
+
+        console.log(location)
         const find = action.findExperiments(dispatch, location.state.id);
         find(dispatch, location.state.id, location.state.Eid);
         console.log(data)

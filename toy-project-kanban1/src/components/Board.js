@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import Boards from './board/boards'
+import * as Router from '../Routers';
 import "./Board.scss";
 
 
@@ -27,6 +28,7 @@ const Board = (props) => {
     return (
         <div className={"board-container"}>
             {experiment}
+            {Router.experiment()}
         </div>
     );
 };

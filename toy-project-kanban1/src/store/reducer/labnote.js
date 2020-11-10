@@ -18,7 +18,6 @@ const findExperiments = (state, action) => {
     let Edata = experiments.find(obj => obj.id === action.Eid);
     console.log(Edata);
     let data = Edata.tasks.find(obj => obj.id === action.id);
-
     console.log(data);
 
     let newNote = {

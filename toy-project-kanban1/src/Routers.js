@@ -1,12 +1,19 @@
 import React from 'react';
-import { Route, Switch } from 'react-router-dom';
+import { Route } from 'react-router-dom';
 import Experiment from './components/experiment/Experiment'
-import Kanbancontainer from './container/Kanbancontainer'
-const Routers = () => (
-    <Switch>
-        <Route exact path='/' component={Kanbancontainer} />
-        <Route exact path='/experiment/1234/:id' component={Experiment} />
-    </Switch>
-)
+import Board from './components/Board';
 
-export default Routers;
+export let board = () => (
+    <Route path={'/experiment'}
+        render={(props) => <Board data={props.experiments} />}
+    />
+);
+
+export let experiment = () => (
+    <Route path={'/experiment/1234/:id'}
+        render={() => <Experiment />}
+    />
+);
+
+
+

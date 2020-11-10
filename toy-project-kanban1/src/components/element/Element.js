@@ -1,14 +1,13 @@
 import React from 'react';
-import { useHistory, useLocation } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import "./Element.scss";
 const Element = (props) => {
     const history = useHistory();
-    const location = useLocation();
     const onTaskClicked = (e, taskId) => {
         e.stopPropagation();
         console.log(taskId)
         history.push({
-            pathname: '/experiment/1234/' + taskId,
+            pathname: '/1234/' + taskId,
             state: {
                 id: taskId,
                 Eid: props.Eid,
