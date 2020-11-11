@@ -7,17 +7,7 @@ import Experiment from '../components/experiment/Experiment';
 import "./Kanbancontainer.scss";
 const Kanbancontainer = () => {
 
-    //router
-    let board = (
-        <div>
-            wait
-        </div>
-    );
-    let detail = (
-        <Route path={'/experiment/1234/:id'}
-            render={() => <Experiment />}
-        />
-    );
+
 
 
 
@@ -31,6 +21,19 @@ const Kanbancontainer = () => {
         dispatch(Action.initNote());
     }, [dispatch])
 
+
+    //router
+    let board = (
+        <Route path={'/experiment'}
+            render={() => <Board data={data.experiments} />}
+        />
+    );
+
+    let detail = (
+        <Route path={'/experiment/1234/:id'}
+            render={() => <Experiment />}
+        />
+    );
 
 
     useEffect(() => {
