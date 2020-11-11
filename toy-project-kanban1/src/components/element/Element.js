@@ -7,7 +7,7 @@ const Element = (props) => {
         e.stopPropagation();
         console.log(taskId)
         history.push({
-            pathname: '/1234/' + taskId,
+            pathname: 'experiment/1234/' + taskId,
             state: {
                 id: taskId,
                 Eid: props.Eid,

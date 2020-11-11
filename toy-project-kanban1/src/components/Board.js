@@ -28,7 +28,6 @@ const Board = (props) => {
     return (
         <div className={"board-container"}>
             {experiment}
-            {Router.experiment()}
         </div>
     );
 };
