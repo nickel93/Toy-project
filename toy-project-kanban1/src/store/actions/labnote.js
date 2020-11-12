@@ -1,5 +1,7 @@
 import { loadNote } from "../../api/noteAPI";
 import * as actionType from "../actions/actionTypes";
+//Note
+let state;
 
 const setNote = (note) => {
     return {
@@ -16,21 +18,18 @@ const findNote = (experiments, id, Eid) => {
         id,
         Eid
     };
-
 };
 
-export const initNote = () => {
+export const initNote = (noteId, email) => {
     return (dispatch) => {
-        loadNote("1234").then((note) => {
+        loadNote(noteId, email).then((note) => {
+            state = note;
             dispatch(setNote(note));
         });
     }
 }
-
-export const findExperiments = () => {
-    return (dispatch, id, Eid) => {
-        loadNote("1234").then((experiments) => {
-            dispatch(findNote(experiments.experiments, id, Eid));
-        });
+export const findExperiments = (id, Eid) => {
+    return (dispatch) => {
+        dispatch(findNote(state.experiments, id, Eid));
     }
 }

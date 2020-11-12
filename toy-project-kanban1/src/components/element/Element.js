@@ -2,7 +2,13 @@ import React from 'react';
 import { useHistory } from 'react-router-dom';
 import "./Element.scss";
 const Element = (props) => {
+
+    //hook
     const history = useHistory();
+
+
+
+    //clicked
     const onTaskClicked = (e, taskId) => {
         e.stopPropagation();
         console.log(taskId)

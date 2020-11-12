@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { useLocation } from 'react-router-dom';
 import * as action from '../../store/actions/labnote';
 import "./Experiment.scss";
-const Experiment = () => {
+const Experiment = (props) => {
     //init data
     let views = (
         <div className={"modal"}>
@@ -15,21 +15,16 @@ const Experiment = () => {
     //hook
     const dispatch = useDispatch();
     const location = useLocation();
-    const data = useSelector((state) => state.data, []);
+    const data = useSelector((state) => state.data);
 
 
     //input data
     const inputdata = useCallback(() => {
-
-        console.log(location)
-        const find = action.findExperiments(dispatch, location.state.id);
-        find(dispatch, location.state.id, location.state.Eid);
-        console.log(data)
-
-    }, [dispatch]);
+        dispatch(action.findExperiments(location.state.id, location.state.Eid));
+    }, [dispatch, location.state.id, location.state.Eid]);
 
 
-    if (data.tasks !== null) {
+    if (data.tasks != null) {
         console.log(data.tasks)
         views = (
             <div className={"modal"}>

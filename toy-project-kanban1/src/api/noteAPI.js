@@ -1,17 +1,21 @@
 import { Request, sendRequest } from "./API";
 
-export const loadNote = async (id) => {
-
-    const request = new Request("GET", "/notes/" + id);
+export const loadNote = async (noteId, email) => {
+    /**
+     * Load the note with id to request with.
+     * @returns {object} return
+     */
+    // const request = new Request("GET", "/notes/" + noteId);
+    const request = new Request("GET", `/notes?noteId=${noteId}&email=${email}`);
     const response = await sendRequest(request);
 
-    if (response !== "ERROR") {
-        console.log(response);
-        return response;
-    } else {
-        return null;
-    }
-
+    // if (response !== "ERROR") {
+    //   console.log(response);
+    //   return response;
+    // } else {
+    //   return null;
+    // }
+    return response;
 };
 
 export const saveNote = async (data) => {

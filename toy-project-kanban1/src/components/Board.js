@@ -1,6 +1,5 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useCallback } from 'react';
 import Boards from './board/boards'
-import * as Router from '../Routers';
 import "./Board.scss";
 
 
@@ -12,16 +11,19 @@ const Board = (props) => {
 
     );
 
-    const inputdata = () => {
-        if (props.data !== null) {
 
+
+    const inputdata = useCallback(() => {
+        if (props.data != null) {
             experiment = props.data.map((el) => {
                 return (
                     <Boards key={el.id} taska={el.tasks} id={el.name} Eid={el.id} />
                 )
             });
         }
-    };
+
+    }, [experiment]);
+
     useEffect(() => {
         inputdata();
     }, [inputdata()]);
