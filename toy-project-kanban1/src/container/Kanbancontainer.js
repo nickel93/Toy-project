@@ -25,7 +25,6 @@ const Kanbancontainer = () => {
 
 
 
-
     //Route
     let detail = (
         <Route path={'/experiment/1234/:id'}

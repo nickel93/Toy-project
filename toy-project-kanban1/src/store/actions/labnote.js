@@ -1,6 +1,6 @@
 import { loadNote } from "../../api/noteAPI";
 import * as actionType from "../actions/actionTypes";
-//Note
+//Note data
 let state;
 
 const setNote = (note) => {
