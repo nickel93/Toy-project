@@ -26,12 +26,12 @@ const Kanbancontainer = () => {
 
 
     //Route
-    let detail = (
+    const detail = (
         <Route path={'/experiment/1234/:id'}
             render={() => <Experiment data={data.experiments} />}
         />
     );
-    let board = (
+    const board = (
         <Route path={'/experiment'}
             render={() => <Board data={data.experiments} />}
         />
