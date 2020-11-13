@@ -1,52 +1,33 @@
-import React, { useCallback, useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux'
+import React from 'react';
 import { useLocation } from 'react-router-dom';
-import * as action from '../../store/actions/labnote';
 import "./Experiment.scss";
 const Experiment = (props) => {
     //init data
-    let views = (
-        <div className={"modal"}>
-            wait
-        </div>
-    );
 
+    let data = null;
 
     //hook
-    const dispatch = useDispatch();
     const location = useLocation();
-    const data = useSelector((state) => state.data);
+
 
 
     //input data
-    const inputdata = useCallback(() => {
-        dispatch(action.findExperiments(location.state.id, location.state.Eid));
-    }, [dispatch, location.state.id, location.state.Eid]);
-
-
-    if (data.tasks != null) {
-        console.log(data.tasks)
-        views = (
+    let views = () => {
+        let Edata = props.data.find(obj => obj.id === location.state.Eid);
+        data = Edata.tasks.find(obj => obj.id === location.state.id);
+        console.log(data);
+        return (
             <div className={"modal"}>
-                <h3>Chemical:{data.tasks.info.display}</h3>
-                <h3>Product number:{data.tasks.info.product_number}</h3>
-                <h3>State:{data.tasks.info.state}</h3>
-                <h3>Weight:{data.tasks.info.weight}</h3>
+                <h3>Chemical:{data.info.display}</h3>
+                <h3>Product number:{data.info.product_number}</h3>
+                <h3>State:{data.info.state}</h3>
+                <h3>Weight:{data.info.weight}</h3>
             </div>
         )
-    }
-
-
-
-
-
-    useEffect(() => {
-        inputdata();
-    }, [inputdata], data);
-
+    };
     return (
         <>
-            {views}
+            {views()}
         </>
     );
 }
