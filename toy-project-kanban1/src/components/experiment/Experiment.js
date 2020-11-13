@@ -3,17 +3,17 @@ import { useLocation } from 'react-router-dom';
 import "./Experiment.scss";
 const Experiment = (props) => {
     //init data
-
-
-
-    //hook
-    const location = useLocation();
     const Edata = props.data.find(obj => obj.id === location.state.Eid);
     const data = Edata.tasks.find(obj => obj.id === location.state.id);
 
 
+    //hook
+    const location = useLocation();
+
+
+
     //input data
-    let views = (
+    const views = (
         <div className={"modal"}>
             <h3>Chemical:{data.info.display}</h3>
             <h3>Product number:{data.info.product_number}</h3>
