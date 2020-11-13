@@ -1,0 +1,73 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Description: 'sam-test
+
+  '
+Transform:
+- AWS::Serverless-2016-10-31
+Globals:
+  Api:
+    OpenApiVersion: 3.0.1
+  Function:
+    Timeout: 3
+    Runtime: nodejs12.x
+    Handler: app.handler
+    Layers:
+    - Ref: XrayLayer
+Resources:
+  APIGateway:
+    Type: AWS::Serverless::Api
+    Properties:
+      Name: Labnote API Gateway
+      StageName: prod
+      TracingEnabled: true
+      MethodSettings:
+      - HttpMethod: '*'
+        LoggingLevel: INFO
+        ResourcePath: /*
+      Cors:
+        AllowMethods: '''*'''
+        AllowHeaders: '''Content-Type,X-Api-Key,Accept,authorization'''
+        AllowOrigin: '''*'''
+      Auth:
+        UsagePlan:
+          CreateUsagePlan: PER_API
+          Quota:
+            Limit: 100
+            Period: DAY
+          Throttle:
+            BurstLimit: 11
+            RateLimit: 10
+        Authorizers:
+          MyCognitoAuth:
+            UserPoolArn: arn:aws:cognito-idp:ap-northeast-2:020762117075:userpool/ap-northeast-2_Bkxn8C0JS
+      EndpointConfiguration: REGIONAL
+  XrayLayer:
+    Type: AWS::Serverless::LayerVersion
+    Properties:
+      CompatibleRuntimes:
+      - nodejs12.x
+      ContentUri: ..\..\layer\xraysdk
+      Description: Labnote XRay SDK Layer
+      LayerName: LabnoteXRaySDKLayer
+      RetentionPolicy: Retain
+  GetUserFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      FunctionName: LabnoteGetUser
+      CodeUri: GetUserFunction
+      Role: arn:aws:iam::020762117075:role/Lambda_Users_Role
+      Events:
+        Trigger:
+          Type: Api
+          Properties:
+            Path: /users
+            Method: get
+            Auth:
+              Authorizer: MyCognitoAuth
+            RestApiId:
+              Ref: APIGateway
+Outputs:
+  WebEndpoint:
+    Description: API Gateway endpoint URL for Prod stage
+    Value:
+      Fn::Sub: https://${APIGateway}.execute-api.${AWS::Region}.amazonaws.com/prod/
