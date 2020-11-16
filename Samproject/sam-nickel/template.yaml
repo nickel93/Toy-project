@@ -1,0 +1,89 @@
+AWSTemplateFormatVersion: "2010-09-09"
+Transform: AWS::Serverless-2016-10-31
+Description: >
+  sam-nickel
+
+  Sample SAM Template for sam-nickel
+
+Globals:
+  Api:
+    OpenApiVersion: 3.0.1
+  Function:
+    Timeout: 3
+    Runtime: nodejs12.x
+    Handler: app.handler
+    Layers:
+      - !Ref XrayLayer
+
+Resources:
+  ######################################################################################################################
+  # A P I G A T E W A Y
+  ######################################################################################################################
+  APIGateway:
+    Type: AWS::Serverless::Api
+    Properties:
+      Name: Labnote API Gateway
+      StageName: prod
+      TracingEnabled: true
+      MethodSettings:
+        - HttpMethod: "*"
+          LoggingLevel: INFO
+          ResourcePath: "/*"
+      Cors:
+        AllowMethods: "'*'"
+        AllowHeaders: "'Content-Type,X-Api-Key,Accept'"
+        AllowOrigin: "'*'"
+      Auth:
+        UsagePlan:
+          CreateUsagePlan: PER_API
+          Quota:
+            Limit: 5000
+            Period: DAY
+          Throttle:
+            BurstLimit: 10
+            RateLimit: 10
+      EndpointConfiguration: REGIONAL
+
+  ######################################################################################################################
+  # X L A Y E R
+  ######################################################################################################################
+
+  XrayLayer:
+    Type: AWS::Serverless::LayerVersion
+    Properties:
+      CompatibleRuntimes:
+        - nodejs12.x
+      ContentUri: layer/xraysdk
+      Description: Labnote XRay SDK Layer
+      LayerName: LabnoteXRaySDKLayer
+
+  ######################################################################################################################
+  # L A M B D A
+  ######################################################################################################################
+
+  GetUserFunction:
+    Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
+    Properties:
+      FunctionName: LabnoteGetUser
+      CodeUri: lambda/User/getUser
+      Role: arn:aws:iam::020762117075:role/Lambda_Users_Role
+      Events:
+        Trigger:
+          Type: Api # More info about API Event Source: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#api
+          Properties:
+            Path: /user/{id}
+            Method: get
+            Auth: #api key에 대한 설명
+              ApiKeyRequired: true
+            RestApiId: !Ref APIGateway
+
+Outputs:
+  # ServerlessRestApi is an implicit API created out of Events key under Serverless::Function
+  # Find out more about other implicit resources you can reference within SAM
+  # https://github.com/awslabs/serverless-application-model/blob/master/docs/internals/generated_resources.rst#api
+  APIGateway:
+    Description: "API Gateway endpoint URL for Prod stage for Labnote"
+    Value: !Sub "https://${APIGateway}.execute-api.${AWS::Region}.amazonaws.com/dev/"
+  APIKey:
+    Description: "API Key ID"
+    Value: !Ref APIGatewayApiKey
