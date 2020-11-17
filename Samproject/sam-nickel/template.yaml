@@ -53,7 +53,7 @@ Resources:
     Properties:
       CompatibleRuntimes:
         - nodejs12.x
-      ContentUri: layer/xraysdk
+      ContentUri: ../../layer/xraysdk
       Description: Labnote XRay SDK Layer
       LayerName: LabnoteXRaySDKLayer
 
@@ -72,6 +72,21 @@ Resources:
           Type: Api # More info about API Event Source: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#api
           Properties:
             Path: /user/{id}
+            Method: get
+            Auth: #api key에 대한 설명
+              ApiKeyRequired: true
+            RestApiId: !Ref APIGateway
+  GetUsersFunction:
+    Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
+    Properties:
+      FunctionName: LabnoteGetUsers
+      CodeUri: lambda/User/getUsers
+      Role: arn:aws:iam::020762117075:role/Lambda_Users_Role
+      Events:
+        Trigger:
+          Type: Api # More info about API Event Source: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#api
+          Properties:
+            Path: /user/users/{id}
             Method: get
             Auth: #api key에 대한 설명
               ApiKeyRequired: true

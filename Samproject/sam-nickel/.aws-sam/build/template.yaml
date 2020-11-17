@@ -1,10 +1,10 @@
-AWSTemplateFormatVersion: '2010-09-09'
+AWSTemplateFormatVersion: "2010-09-09"
 Transform: AWS::Serverless-2016-10-31
-Description: 'sam-nickel
+Description: "sam-nickel
 
   Sample SAM Template for sam-nickel
 
-  '
+  "
 Globals:
   Api:
     OpenApiVersion: 3.0.1
@@ -13,7 +13,7 @@ Globals:
     Runtime: nodejs12.x
     Handler: app.handler
     Layers:
-    - Ref: XrayLayer
+      - Ref: XrayLayer
 Resources:
   APIGateway:
     Type: AWS::Serverless::Api
@@ -22,13 +22,13 @@ Resources:
       StageName: prod
       TracingEnabled: true
       MethodSettings:
-      - HttpMethod: '*'
-        LoggingLevel: INFO
-        ResourcePath: /*
+        - HttpMethod: "*"
+          LoggingLevel: INFO
+          ResourcePath: /*
       Cors:
-        AllowMethods: '''*'''
-        AllowHeaders: '''Content-Type,X-Api-Key,Accept'''
-        AllowOrigin: '''*'''
+        AllowMethods: "'*'"
+        AllowHeaders: "'Content-Type,X-Api-Key,Accept'"
+        AllowOrigin: "'*'"
       Auth:
         UsagePlan:
           CreateUsagePlan: PER_API
@@ -43,8 +43,8 @@ Resources:
     Type: AWS::Serverless::LayerVersion
     Properties:
       CompatibleRuntimes:
-      - nodejs12.x
-      ContentUri: ..\..\layer\xraysdk
+        - nodejs12.x
+      ContentUri: ../../layer/xraysdk
       Description: Labnote XRay SDK Layer
       LayerName: LabnoteXRaySDKLayer
   GetUserFunction:
@@ -58,6 +58,22 @@ Resources:
           Type: Api
           Properties:
             Path: /user/{id}
+            Method: get
+            Auth:
+              ApiKeyRequired: true
+            RestApiId:
+              Ref: APIGateway
+  GetUsersFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      FunctionName: LabnoteGetUsers
+      CodeUri: GetUsersFunction
+      Role: arn:aws:iam::020762117075:role/Lambda_Users_Role
+      Events:
+        Trigger:
+          Type: Api
+          Properties:
+            Path: /user/users/{id}
             Method: get
             Auth:
               ApiKeyRequired: true

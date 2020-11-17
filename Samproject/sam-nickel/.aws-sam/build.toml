@@ -5,3 +5,8 @@
 codeuri = "lambda/User/getUser"
 runtime = "nodejs12.x"
 functions = ["GetUserFunction"]
+
+[build_definitions.eb0cd000-8643-474a-bfac-8f9ed43afcfd]
+codeuri = "lambda/User/getUsers"
+runtime = "nodejs12.x"
+functions = ["GetUsersFunction"]
