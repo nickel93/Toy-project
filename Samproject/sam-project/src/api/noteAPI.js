@@ -1,12 +1,12 @@
 import { Request, sendRequest } from "./API";
 
-export const loadNote = async (noteId, email) => {
+export const loadUser = async (noteId) => {
     /**
      * Load the note with id to request with.
      * @returns {object} return
      */
     // const request = new Request("GET", "/notes/" + noteId);
-    const request = new Request("GET", `/notes?noteId=${noteId}&email=${email}`);
+    const request = new Request("GET", `/user?id=${noteId}`);
     const response = await sendRequest(request);
 
     // if (response !== "ERROR") {
@@ -18,21 +18,3 @@ export const loadNote = async (noteId, email) => {
     return response;
 };
 
-export const saveNote = async (data) => {
-    /**
-     * Update the note and returns success or failure
-     * @returns {bool} return
-     */
-
-    const request = new Request("PUT", "/notes/" + data.id, data);
-    const response = await sendRequest(request);
-
-    if (response !== "ERROR") {
-        console.log(response);
-        return response;
-    } else {
-        return null;
-    }
-
-    // TODO : check if the object returned is empty
-};

@@ -7,10 +7,25 @@ const setUser = (user) => {
     };
 };
 
+const setSign = (auth) => {
+    return {
+        type: actionType.SETLOGIN,
+        auth
+    };
+};
 
-export const initUser = (userId) => {
+
+export const initUser = (user) => {
     return (dispatch) => {
-        dispatch(setUser());
+        console.log(user)
+        dispatch(setUser(user));
+    };
+
+};
+
+export const setLogin = (auth) => {
+    return (dispatch) => {
+        dispatch(setSign(auth));
     };
 
 };
