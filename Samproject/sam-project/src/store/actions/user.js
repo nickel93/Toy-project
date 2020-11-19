@@ -26,13 +26,12 @@ export const initUser = (user) => {
     return (dispatch) => {
         dispatch(setUser(user));
         getUser(user.sub).then((data) => {
-
             dispatch(setPosition(data));
         });
 
     };
-
 };
+
 
 export const setLogin = (auth) => {
     return (dispatch) => {

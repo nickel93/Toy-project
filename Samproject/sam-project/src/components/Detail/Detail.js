@@ -1,10 +1,12 @@
 import React, { useState, useContext } from 'react';
 import { CognitoUserAttribute } from "amazon-cognito-identity-js";
+import { updateUserPosition } from "../../api/noteAPI";
 import { AccountContext } from "../Auth/Accounts"
 const Detail = (props) => {
     const [family_name, setFamily_name] = useState();
     const [given_name, setGiven_name] = useState();
     const [password, setPassword] = useState();
+    const [position, setposition] = useState();
     const { authenticate } = useContext(AccountContext);
 
     const updateName = () => {
@@ -26,6 +28,13 @@ const Detail = (props) => {
                 console.log("성공!" + results);
             }
         })
+    };
+
+    const updatePosition = () => {
+        updateUserPosition(props.user.sub, props.user.email, position).then((data) => {
+            console.log("성공!" + data);
+        });
+
     };
     const updatePassword = () => {
         authenticate(props.user.email, password).then(() => {
@@ -52,6 +61,11 @@ const Detail = (props) => {
                 <span><input onChange={(e) => setFamily_name(e.target.value)} /></span>
                 <span><input onChange={(e) => setGiven_name(e.target.value)} /></span>
                 <span><button onClick={updateName}>이름 바꾸기</button></span>
+            </div>
+            <div>
+                <span><h3>Position</h3></span>
+                <span><input onChange={(e) => setposition(e.target.value)} /></span>
+                <span><button onClick={updatePosition}>Position 바꾸기</button></span>
             </div>
             <div>
                 <span><h3>Password change</h3></span>

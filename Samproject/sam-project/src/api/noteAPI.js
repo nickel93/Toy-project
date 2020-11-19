@@ -12,3 +12,19 @@ export const getUser = async (userId) => {
     }
 };
 
+export const updateUserPosition = async (id, email, position) => {
+    const request = new Request("PUT", "/user/position/" + id, {
+        email: email,
+        position: position,
+    });
+    const response = await sendRequest(request);
+
+    if (response !== "ERROR") {
+        // console.log(response);
+        return response;
+    } else {
+        return response;
+    }
+};
+
+
