@@ -1,6 +1,6 @@
 
 import React, { useState, useContext } from 'react';
-import { AccountContext } from "../Accounts"
+import { AccountContext } from "../Accounts";
 import { useDispatch } from 'react-redux';
 import * as user from '../../../store/actions/user'
 const Signln = () => {
@@ -8,7 +8,7 @@ const Signln = () => {
     const [email, setEmail] = useState();
     const [password, setPassword] = useState();
     const { authenticate } = useContext(AccountContext);
-
+    const { getSession } = useContext(AccountContext);
     const onSubmit = (e) => {
         e.preventDefault();
         console.log(email + " " + password);
@@ -16,6 +16,10 @@ const Signln = () => {
             .then((data) => {
                 console.log("Logged In!" + data);
                 dispatch(user.setLogin(true));
+                getSession().then((res) => {
+                    console.log(res);
+                    dispatch(user.initUser(res));
+                });
             })
             .catch((err) => {
                 console.error("Failed to login!", err);

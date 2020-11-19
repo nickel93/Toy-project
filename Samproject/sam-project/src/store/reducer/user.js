@@ -4,9 +4,11 @@ import * as actionType from '../actions/actionType';
 const initalState = {
     user: "",
     auth: false,
+    position: "",
 };
 
 const setUser = (state, action) => {
+    console.log(action);
     let newUser = {
         ...state,
         user: action.user
@@ -21,6 +23,13 @@ const setLogin = (state, action) => {
     }
     return newUser;
 }
+const setPosition = (state, action) => {
+    let newUser = {
+        ...state,
+        position: action.position
+    }
+    return newUser;
+}
 
 
 const reducer = (state = initalState, action) => {
@@ -29,6 +38,8 @@ const reducer = (state = initalState, action) => {
             return setUser(state, action);
         case actionType.SETLOGIN:
             return setLogin(state, action);
+        case actionType.SETPOSITION:
+            return setPosition(state, action);
         default:
             return state;
     }

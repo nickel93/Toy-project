@@ -7,6 +7,7 @@ const Logincontainer = () => {
     const data = useSelector((state) => state.user, []);
     const initLogin = useCallback(() => {
         setLogin(data.auth);
+
     }, [data.auth]);
 
     useEffect(() => {
@@ -15,7 +16,7 @@ const Logincontainer = () => {
 
     return (
         <div>
-            {Login ? <Detail /> : <SignIn />}
+            {Login ? <Detail user={data.user} /> : <SignIn />}
         </div>
     );
 

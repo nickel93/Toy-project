@@ -1,4 +1,4 @@
-const HOST = "https://ojzokspdt7.execute-api.ap-southeast-2.amazonaws.com/prod";
+const HOST = "https://s96zyl2dfd.execute-api.ap-southeast-2.amazonaws.com/prod";
 
 export class Request {
     constructor(method, path, body = null) {
@@ -19,7 +19,7 @@ export const sendRequest = async (request) => {
             headers: {
                 "Content-Type": "application/json",
                 Accept: "application/json",
-                "x-api-key": "YviBGCapUH3rGw5afnbsd5hxGNg8lrbe1U0J5Zgx",
+                "x-api-key": "vnVvTkMqUK7XCZ8QFRkGP7mVI70PclSP3B6CNjhu",
             },
             body: request.body ? JSON.stringify(request.body) : null,
         });
