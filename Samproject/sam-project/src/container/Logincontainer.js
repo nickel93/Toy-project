@@ -16,7 +16,7 @@ const Logincontainer = () => {
 
     return (
         <div>
-            {Login ? <Detail user={data.user} /> : <SignIn />}
+            {Login ? <Detail user={data.user} position={data.position} /> : <SignIn />}
         </div>
     );
 

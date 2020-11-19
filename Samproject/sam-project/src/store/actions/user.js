@@ -24,10 +24,9 @@ const setPosition = (position) => {
 
 export const initUser = (user) => {
     return (dispatch) => {
-        console.log(user)
         dispatch(setUser(user));
-        getUser("091b9baa-f5c2-4286-bcf2-70e899402536").then((data) => {
-            console.log(data);
+        getUser(user.sub).then((data) => {
+
             dispatch(setPosition(data));
         });
 

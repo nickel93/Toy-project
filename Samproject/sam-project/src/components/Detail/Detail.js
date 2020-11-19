@@ -6,6 +6,7 @@ const Detail = (props) => {
     const [given_name, setGiven_name] = useState();
     const [password, setPassword] = useState();
     const { authenticate } = useContext(AccountContext);
+
     const updateName = () => {
         const attributes = [
             new CognitoUserAttribute({
@@ -44,11 +45,12 @@ const Detail = (props) => {
         <div>
             <h3>Email:</h3>{props.user.email}
 
-            <h3>Affiliation</h3>
+            <h3>Affiliation</h3>{props.user.family_name}
+            <h3>Position</h3>{props.position.position}
             <div>
                 <span><h3>Name</h3></span>
-                <span><input value={props.user.family_name} onChange={(e) => setFamily_name(e.target.value)} /></span>
-                <span><input value={props.user.given_name} onChange={(e) => setGiven_name(e.target.value)} /></span>
+                <span><input onChange={(e) => setFamily_name(e.target.value)} /></span>
+                <span><input onChange={(e) => setGiven_name(e.target.value)} /></span>
                 <span><button onClick={updateName}>이름 바꾸기</button></span>
             </div>
             <div>
