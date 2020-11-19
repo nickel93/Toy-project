@@ -2,9 +2,9 @@ version = 0.1
 [default]
 [default.deploy]
 [default.deploy.parameters]
-stack_name = "sam-nickel"
+stack_name = "sam-nicke"
 s3_bucket = "aws-sam-cli-managed-default-samclisourcebucket-d64q3xmuldzp"
-s3_prefix = "sam-nickel"
+s3_prefix = "sam-nicke"
 region = "ap-southeast-2"
 confirm_changeset = true
 capabilities = "CAPABILITY_IAM"
