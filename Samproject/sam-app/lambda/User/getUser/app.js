@@ -1,8 +1,7 @@
 const tableName = "LabnoteUsers";
-const userPoolId = "ap-northeast-2_Bkxn8C0JS";
 var AWS = require("aws-sdk");
 var documentClient = new AWS.DynamoDB.DocumentClient({
-    apiVersion: "2012-08-10",
+    apiVersion: "2012-08-10", region: 'ap-northeast-2'
 });
 
 

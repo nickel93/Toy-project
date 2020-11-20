@@ -63,6 +63,24 @@ Resources:
               ApiKeyRequired: true
             RestApiId:
               Ref: APIGateway
+  PutUserPositionFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      FunctionName: LabnotePutUserPosition
+      CodeUri: PutUserPositionFunction
+      Role: arn:aws:iam::020762117075:role/Lambda_Users_Role
+      Events:
+        Trigger:
+          Type: Api
+          Properties:
+            Path: /user/position
+            Method: put
+            RequestParameters:
+            - method.request.querystring.noteId
+            Auth:
+              ApiKeyRequired: true
+            RestApiId:
+              Ref: APIGateway
 Outputs:
   APIGateway:
     Description: API Gateway endpoint URL for Prod stage for Labnote
