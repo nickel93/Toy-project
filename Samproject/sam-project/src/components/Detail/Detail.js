@@ -31,6 +31,7 @@ const Detail = (props) => {
     };
 
     const updatePosition = () => {
+        console.log(props.user.email)
         updateUserPosition(props.user.sub, props.user.email, position).then((data) => {
             console.log("성공!" + data);
         });

@@ -87,10 +87,8 @@ Resources:
         Trigger:
           Type: Api # More info about API Event Source: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#api
           Properties:
-            Path: /user/position
+            Path: /user/position/{id}
             Method: put
-            RequestParameters:
-              - method.request.querystring.noteId
             Auth: #api key에 대한 설명
               ApiKeyRequired: true
             RestApiId: !Ref APIGateway

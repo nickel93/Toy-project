@@ -73,10 +73,8 @@ Resources:
         Trigger:
           Type: Api
           Properties:
-            Path: /user/position
+            Path: /user/position/{id}
             Method: put
-            RequestParameters:
-            - method.request.querystring.noteId
             Auth:
               ApiKeyRequired: true
             RestApiId:
